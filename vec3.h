@@ -49,7 +49,6 @@ class vec3 {
 using point3   = vec3;
 using color    = vec3;
 
-#endif
 
 inline std::ostream& operator <<(std::ostream &out, const vec3 &v) {
     return out << v.e[0] << ' ' << v.e[1] << ' ' << v.e[2];
@@ -92,3 +91,5 @@ inline vec3 cross(const vec3 &u, const vec3 &v) {
 inline vec3 unit_vector(vec3 v) {
     return v / v.length();
 }
+
+#endif
