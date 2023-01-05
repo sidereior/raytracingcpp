@@ -24,15 +24,16 @@ int main() {
    
     //rows written top to bottom
     //pixels in each row written left to right
-    std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
+    std::cout << "P3\n" << image_width << " " << image_height << "\n255\n";
     for(int j = image_height-1; j >= 0; --j) {
-        std::cerr << "\rprogress: " << ((int)((((image_height-1)/j)))/2.55) << ' ' << std::flush;
+        //((int)((((image_height-1)/j)))/2.55)
+       std::cerr << "\rprogress: " << j << ' ' << std::flush;
         for(int i = 0; i < image_width; ++i) {
             auto u = double(i) / (image_width-1);
             auto v = double(j) / (image_height-1);
             ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
             color pixel_color = ray_color(r);
-           write_color(std::cout, pixel_color);
+            write_color(std::cout, pixel_color);
         }
     }
     std::cerr << "\ncomplete\n";
