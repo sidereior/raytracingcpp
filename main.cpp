@@ -15,13 +15,13 @@ int main() {
     const int image_width = 400;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
     auto viewport_height = 2.0;
-    auto viewport_width = aspect_ratio * viewport_height;
-    auto focal_length = 1.0;//what is the different between focal length and focal distance??
-    auto origin = point3(0,0,0);
-    auto horizontal = vec3(viewport_width, 0, 0);
     auto vertical = vec3(0, viewport_height, 0);
+    auto origin = point3(0,0,0);
+    auto viewport_width = aspect_ratio * viewport_height;
+    auto horizontal = vec3(viewport_width, 0, 0);
+    auto focal_length = 1.0;//what is the different between focal length and focal distance??
     auto lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0,0,focal_length);
-    
+   
     //rows written top to bottom
     //pixels in each row written left to right
     std::cout << "P3\n" << image_width << ' ' << image_height << "\n255\n";
