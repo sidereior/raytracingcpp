@@ -10,6 +10,10 @@ color ray_color(const ray& r){
     return (1.0-t)*color(1.0,1.0,1.0) + t*color(0.5,0.7,1.0);
 }
 
+bool hit_sphere(){
+    return true;
+}
+
 int main() {
     const auto aspect_ratio = 16.0/9.0;
     const int image_width = 400;
