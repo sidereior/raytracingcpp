@@ -6,6 +6,7 @@
 
 
 double hit_sphere(const point3& center, double radius, const ray& r){
+    //this can be simplified later
     vec3 oc = r.origin() - center;
     auto a = dot(r.direction(), r.direction());
     auto b = 2.0 * dot(oc, r.direction());
