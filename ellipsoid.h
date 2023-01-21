@@ -8,13 +8,13 @@ class sphere : public intersection{
     public:
         sphere() {}
         sphere(point3 c, double r) : center(c), radius(r) {};
-        virutal bool hit(const ray& r, double t_min, double t_max, intersection_record& rec) cosnt override;
+        virtual bool hit(const ray& r, double t_min, double t_max, intersection_record& rec) const override;
         public:
             point3 center;
             double radius;
 };
 
-bool sphere::intersection(const ray&r, double t_min, double t_max, intersection_record& rec) const{
+bool sphere::hit(const ray&r, double t_min, double t_max, intersection_record& rec) const{
     vec3 origincenter = r.origin() - center;
     auto a = r.direction().length_squared();
     auto half_b = dot(origincenter, r.direction());
@@ -31,4 +31,10 @@ bool sphere::intersection(const ray&r, double t_min, double t_max, intersection_
             return false;
     }
     //then fix the rec
+    rec.t = root;
+    rec.p = r.at(rec.t);
+    rec.normal = (rec.p - center) / radius;
+    return true;
 }
+
+#endif
