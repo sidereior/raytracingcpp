@@ -23,7 +23,7 @@ public:
     std::vector<shared_ptr<intersection>> objects;
 };
 
-bool intersection_list::intersection(const ray& r, double t_min, double t_max, intersection_record& rec) const
+bool intersection_list::hit(const ray& r, double t_min, double t_max, intersection_record& rec) const
 {
     //why is the inherited member not allowed
     intersection_record temp_rec;
