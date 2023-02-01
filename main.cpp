@@ -12,8 +12,6 @@ double hit_sphere(const point3& center, double radius, const ray& r){
     auto b = 2.0 * dot(oc, r.direction());
     auto c = dot(oc,oc) - radius*radius;
     auto discriminant = b*b - 4*a*c;
-    
-    //need to simplify this?
     if (discriminant < 0){
         return -1.0;
     } else {
@@ -31,6 +29,7 @@ double hit_sphere(const point3& center, double radius, const ray& r){
     }
     */
 }
+
 
 color ray_color(const ray& r){
     auto t = hit_sphere(point3(0,0,-1), 0.5, r);
