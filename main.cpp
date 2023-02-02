@@ -58,7 +58,8 @@ int main() {
     auto lower_left_corner = origin - horizontal/2 - vertical/2 - vec3(0,0,focal_length);
     intersection_list world;
     world.add(std::make_shared<ellipsoid>(point3(0,0,-1), 0.5));
-     world.add(std::make_shared<ellipsoid>(point3(-0.2,0.2,-1), 0.25));
+    //add emmission from materials
+    //make a sun that has emmisisions
     world.add(std::make_shared<ellipsoid>(point3(0,-100.5,-1), 100));
     //rows written top to bottom
     //pixels in each row written left to right
