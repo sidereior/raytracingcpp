@@ -7,17 +7,22 @@
 #include "ellipsoid.h"
 #include <iostream>
 
-color ray_color(const ray& r, const intersection& world){
+color ray_color(const ray& r, const intersection& world, int bounces){
     intersection_record rec;
-    if(world.hit(r, 0, 2147483645, rec)){
-        return 0.5*(rec.normal + color(1,1,1));
+    if(bounces <= 0){
+        return color(0,0,0);
+    }
+    if(world.hit(r, 0.001, 2147483645, rec)){
+        //fix this with just seeing if bounces are less than 0
+        //if bounces are less than zero then return 0,0,0 color
+        point3 target = rec.p + rec.normal + random_in_unit_vector();
+        //why is this not in the same type???
+        return 0.5*ray_color(ray(rec.p, target-rec.p), world, bounces-1);
     }
     vec3 unit_direction = unit_vector(r.direction());
     auto t = 0.5*(unit_direction.y() + 1.0);
     return (1.0-t)*color(1.0, 1.0, 1.0) + t*color(0.5, 0.7, 1.0);
 }
-
-
 
 double hit_sphere(const point3& center, double radius, const ray& r){
     //this can be simplified later
@@ -47,6 +52,7 @@ double hit_sphere(const point3& center, double radius, const ray& r){
 
 int main() {
     const auto aspect_ratio = 16.0/9.0;
+    const int max_bounces = 50;
     const int image_width = 400;
     const int image_height = static_cast<int>(image_width / aspect_ratio);
     auto viewport_height = 2.0;
@@ -71,7 +77,7 @@ int main() {
             auto u = double(i) / (image_width-1);
             auto v = double(j) / (image_height-1);
             ray r(origin, lower_left_corner + u*horizontal + v*vertical - origin);
-            color pixel_color = ray_color(r,world);
+            color pixel_color = ray_color(r,world, max_bounces);
             write_color(std::cout, pixel_color);
         }
     }
