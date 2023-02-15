@@ -8,14 +8,32 @@
 #include <iostream>
 
 color ray_color(const ray& r, const intersection& world, int bounces){
+    std::cout << "run5"; //this runs but doesnt go any further
     intersection_record rec;
     if(bounces <= 0){
         return color(0,0,0);
     }
-    if(world.hit(r, 0.001, 2147483645, rec)){
+    vec3 p;
+    int iterations = 0;
+    while(true) {
+        iterations++:
+        std::cout << "run" + iterations;
+        std::cout << "run4";
+	    auto r1 = rand() % 1 + -1;
+	    auto r2 = rand() % 1 + -1;
+	    auto r3 = rand() % 1 + -1;
+        vec3 p(r1, r2, r3);
+        if (p.length_squared() < 1)
+        {
+            std::cout << "run7";
+            break;
+        }
+    }
+    if(world.hit(r, 0.0, 2147483645, rec)){
+        std::cout << "hit";
         //fix this with just seeing if bounces are less than 0
         //if bounces are less than zero then return 0,0,0 color
-        point3 target = rec.p + rec.normal + random_in_unit_vector();
+        point3 target = rec.p + rec.normal + p;
         //why is this not in the same type???
         return 0.5*ray_color(ray(rec.p, target-rec.p), world, bounces-1);
     }
@@ -36,8 +54,6 @@ double hit_sphere(const point3& center, double radius, const ray& r){
     } else {
         return (-b - sqrt(discriminant)) / (2.0*a);
     }
-
-    //return (discriminant > 0);
     /*
     if(discriminant < 0)
     {

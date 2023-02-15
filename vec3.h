@@ -42,8 +42,9 @@ class vec3 {
             return e[0]*e[0] + e[1]*e[1] + e[2]*e[2];
         }
 
-        vec3 random_in_unit_sphere() {
+        vec3 randominside() {
             while(true) {
+                std::cout << "run8";
 	            auto r1 = rand() % 1 + -1;
 	            auto r2 = rand() % 1 + -1;
 	            auto r3 = rand() % 1 + -1;
@@ -51,6 +52,7 @@ class vec3 {
                 if (p.length_squared() < 1)
                 {
                     return p;
+                    std::cout << "run9";
                 }
             }
         }
