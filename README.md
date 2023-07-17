@@ -1,3 +1,2 @@
 # raytracingcpp
-ray tracing graphics engine in c++
-making to apply some skills from mvc course
+My first attempt at building a ray tracing engine (in c++).
